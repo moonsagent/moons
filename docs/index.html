@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>moons: every coin that trades against yours</title>
+<meta name="description" content="paste any token address and see every coin paired against it, live from DexScreener: estimated buy flow back, a 0 to 100 pairing health score, the pair network graph and new pairs. CLI, dashboard and MCP server too.">
+<meta property="og:title" content="moons: every coin that trades against yours">
+<meta property="og:description" content="paste a token, see every coin that trades against it. live in your browser.">
+<meta property="og:image" content="https://moonscli.com/preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#060A14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cmask id='m' maskUnits='userSpaceOnUse' x='-20' y='-20' width='140' height='140'%3E%3Crect x='-20' y='-20' width='140' height='140' fill='%23fff'/%3E%3Cpath d='M24 32a6 6 0 1 0 12 0a6 6 0 1 0 -12 0Z'/%3E%3Cpath d='M44.5 22a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z'/%3E%3Cpath d='M22 54a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z'/%3E%3Cpath d='M57 72a15 15 0 1 0 30 0a15 15 0 1 0 -30 0Z' fill='none' stroke='%23000' stroke-width='8'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='%238DB8FF'%3E%3Cpath d='M10 42a32 32 0 1 0 64 0a32 32 0 1 0 -64 0Z'/%3E%3Cpath d='M57 72a15 15 0 1 0 30 0a15 15 0 1 0 -30 0Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" href="fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="app.js">
+<style>
+@font-face{font-family:Geist;src:url(fonts/geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(fonts/geist-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(fonts/geist-mono-500.woff2) format("woff2");font-weight:500 700;font-display:swap}
+:root{--bg:#060A14;--panel:#0B1222;--raised:#111A2E;--line:rgba(141,184,255,.12);--line2:rgba(141,184,255,.24);--text:#E8EEF9;--muted:#7D8BA6;--accent:#8DB8FF;--up:#3DDC84;--down:#FF5F6D;
+--sans:Geist,Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(rgba(141,184,255,.16) .8px,transparent 1.2px),radial-gradient(rgba(232,238,249,.10) .6px,transparent 1px);background-size:58px 58px,37px 37px;background-position:0 0,19px 23px}
+a{color:var(--accent);text-decoration:none}
+code{font-family:var(--mono);font-size:.88em;color:var(--text);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+.w{max-width:1180px;margin:0 auto;padding:0 32px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:21px;letter-spacing:-.04em;color:var(--text)}.brand img{display:block;border-radius:8px}
+.links{display:flex;align-items:center;gap:4px;background:rgba(11,18,34,.75);border:1px solid var(--line);border-radius:999px;padding:4px}
+.links a{color:var(--muted);font-size:14px;padding:6px 14px;border-radius:999px}.links a:hover{color:var(--text);background:var(--raised)}
+.links a.gh{color:#060A14;background:var(--accent);font-weight:600}
+/* hero + tool */
+.hero{position:relative;text-align:center;padding:26px 0 8px;overflow-x:clip}
+.hero .rings{position:absolute;left:50%;top:-40px;width:1100px;height:460px;transform:translateX(-50%);pointer-events:none;z-index:0}
+.hero>*:not(.rings){position:relative;z-index:1}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:500 12.5px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:rgba(6,10,20,.8)}
+.kicker i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.kicker i.pulse{animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+h1{font-size:52px;line-height:1.06;font-weight:600;letter-spacing:-.045em;margin:18px auto 0;max-width:900px}
+h1 em{font-style:normal;color:var(--accent);white-space:nowrap}
+.lede{max-width:640px;margin:14px auto 0;color:var(--muted);font-size:17px}
+form.scan{display:flex;align-items:center;gap:6px;width:100%;max-width:780px;margin:26px auto 0;background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:6px;box-shadow:0 0 0 6px rgba(141,184,255,.04),0 18px 50px rgba(2,5,12,.55)}
+form.scan:focus-within{border-color:rgba(141,184,255,.55)}
+form.scan input,form.scan select,form.scan button{font:inherit;color:var(--text);background:transparent;border:0;outline:none}
+#token{flex:1;min-width:0;padding:11px 18px;font-family:var(--mono);font-size:14px}
+#token::placeholder{color:var(--muted)}
+#chain{padding:10px 14px;border-left:1px solid var(--line);border-radius:0;color:var(--muted);cursor:pointer;font-size:14px}
+#chain option{background:var(--panel)}
+.go{background:var(--accent)!important;color:#060A14!important;font-weight:600!important;border-radius:999px;padding:11px 26px!important;cursor:pointer;transition:filter .15s}
+.go:hover{filter:brightness(1.08)}.go:disabled{filter:saturate(.4) brightness(.8);cursor:progress}
+.go:focus-visible,.ghost:focus-visible,.ex a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ex{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:13.5px;color:var(--muted)}
+.ex a{display:inline-flex;align-items:center;gap:7px;color:var(--text);border:1px solid var(--line);background:rgba(11,18,34,.75);border-radius:999px;padding:4px 12px}
+.ex a:hover{border-color:var(--line2)}.ex a span{color:var(--muted);font:12px var(--mono)}
+.ex a.first{color:#060A14;background:var(--accent);border-color:var(--accent);font-weight:600}.ex a.first span{color:#0B1222}
+/* results */
+#app{min-height:340px;margin-top:10px}
+.welcome{position:relative;text-align:center;padding:34px 0 10px;color:var(--muted)}
+.welcome .orb{position:relative;width:340px;height:200px;margin:0 auto}
+.welcome .orb svg{position:absolute;left:50%;top:50%;width:900px;height:380px;transform:translate(-50%,-50%);pointer-events:none}
+.welcome .orb img{position:absolute;left:50%;top:50%;width:132px;height:132px;transform:translate(-50%,-50%);border-radius:30px;box-shadow:0 0 80px rgba(141,184,255,.18)}
+.welcome p{max-width:560px;margin:10px auto 0;font-size:15px}
+.res-head{position:relative;text-align:center;padding:22px 0 0}
+.sym{margin:12px 0 0;font-size:52px;line-height:1.08;font-weight:600;letter-spacing:-.045em;overflow-wrap:anywhere}
+.sym .nm{color:var(--muted);font-size:17px;font-weight:500;letter-spacing:-.01em;vertical-align:middle;margin-left:4px}
+.addr{display:inline-block;font:12px var(--mono);color:var(--muted);background:rgba(11,18,34,.8);border:1px solid var(--line);border-radius:999px;padding:6px 14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.qline{margin-top:10px;display:flex;justify-content:center;align-items:center;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:13px;min-height:30px}
+.qline b{color:var(--text);font:500 13px var(--mono);margin-left:6px}
+.say{margin:8px 0 0;font:500 14px var(--mono);color:var(--accent);min-height:22px}
+.acts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px;min-height:34px}
+.ghost{display:inline-flex;align-items:center;font:500 13px var(--sans);color:var(--text);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.ghost:hover{border-color:var(--line2);color:var(--accent)}
+.orbit{display:grid;grid-template-columns:1fr 300px 1fr;gap:28px;align-items:center;margin:22px 0 4px}
+.side{display:grid;gap:26px}.side.l{text-align:right}
+.st .k{font-size:12.5px;color:var(--muted)}
+.st .v{font:500 30px/1.15 var(--mono);letter-spacing:-.03em;margin-top:4px;white-space:nowrap}
+.st .s{font-size:12px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st.acc .v{color:var(--accent)}
+.gauge{position:relative;width:300px;height:300px;margin:0 auto}
+.gauge svg{position:absolute;inset:0;width:100%;height:100%}
+.gauge .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .lbl{font-size:12px;color:var(--muted)}
+.gauge .sc{font-weight:600;font-size:76px;line-height:1;letter-spacing:-.05em;margin-top:4px}
+.gauge .sc small{font:500 15px var(--mono);color:var(--muted);letter-spacing:0;margin-left:4px}
+.grade{display:inline-block;margin-top:10px;font-size:12px;font-weight:500;padding:4px 12px;border-radius:999px;border:1px solid}
+.spin{transform-origin:150px 150px;animation:spin 1.4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nfa{text-align:center;font-size:12px;color:var(--muted);margin:6px 0 0}
+.panel{background:rgba(11,18,34,.92);border:1px solid var(--line);border-radius:20px;padding:24px}
+#app .panel{padding:22px 24px;min-width:0;margin-top:18px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;margin:0 0 16px;flex-wrap:wrap}
+.ph h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em}
+.status{font:11.5px var(--mono);color:var(--muted)}
+#app .graph{padding:22px 22px 18px}
+.gw{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.gw svg{width:100%;height:auto;display:block}
+.gw.live{border-color:var(--line2)}
+.gsk{aspect-ratio:3/2;background:radial-gradient(ellipse at center,rgba(141,184,255,.06),transparent 60%),var(--bg)}
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.comp{display:grid;gap:15px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:baseline;font-size:13px}
+.row em{font-style:normal;color:var(--muted);font-size:12px;margin-left:6px}
+.row .n{font:500 12.5px var(--mono);color:var(--text)}.row .n.cy{color:var(--accent)}
+.bar{grid-column:1/-1;height:4px;border-radius:999px;background:var(--raised);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(141,184,255,.45),var(--accent))}
+.note{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.6;padding-top:14px;border-top:1px solid var(--line)}
+.price{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:14px 16px;border-radius:14px;background:var(--raised);border:1px solid var(--line);margin-bottom:18px;min-height:82px}
+.price .k{font-size:12px;color:var(--muted)}
+.price .px{font:500 22px var(--mono);letter-spacing:-.02em;margin-top:4px}
+.price svg{display:block;width:52%;height:46px}
+.sk{display:inline-block;height:14px;border-radius:999px;background:linear-gradient(90deg,var(--raised) 0%,#1A2640 50%,var(--raised) 100%);background-size:200% 100%;animation:sh 1.3s ease-in-out infinite;vertical-align:middle;max-width:100%}
+.sk.spark{width:52%;height:40px;border-radius:12px}
+@keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;gap:10px;align-items:center;background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:7px 15px 7px 7px;font-size:13px;color:var(--text);max-width:100%}
+.chip:hover{border-color:var(--line2)}
+.chip .tag{font:500 10.5px var(--mono);color:#060A14;background:var(--accent);border-radius:999px;padding:3px 8px}
+.chip b{font-weight:600}.chip .m{color:var(--muted);font:12px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{color:var(--muted);font-size:13px}
+.tbl{overflow-x:auto;margin:0 -8px}
+.tbl table{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-size:12px;color:var(--muted);font-weight:500;text-align:right;padding:0;white-space:nowrap}
+.tbl th button{font:inherit;color:inherit;background:none;border:0;padding:9px 12px;cursor:pointer;white-space:nowrap}
+.tbl th.on{color:var(--accent)}
+.tbl th:first-child,.tbl td:first-child,.tbl th:nth-child(2),.tbl td:nth-child(2){text-align:left}
+.tbl td{padding:11px 12px;border-top:1px solid var(--line);text-align:right;font:12.5px var(--mono);white-space:nowrap}
+.tbl td:first-child{font:500 13px var(--sans)}
+.tbl td:first-child a{color:var(--text)}.tbl td:first-child a:hover{color:var(--accent)}
+.tbl tbody tr:hover td{background:rgba(141,184,255,.035)}
+.tbl tr.fresh td:first-child::after{content:"new";margin-left:8px;font:500 10px var(--mono);color:var(--accent);border:1px solid rgba(141,184,255,.4);border-radius:999px;padding:1px 7px;vertical-align:1px}
+.hint-m{display:none}
+.up{color:var(--up)}.down{color:var(--down)}.mut{color:var(--muted)}.cy{color:var(--accent)}.small{font-size:13px}
+.bs{display:inline-flex;align-items:center;gap:8px}
+.bs i{display:inline-block;width:40px;height:4px;border-radius:999px;background:var(--down);position:relative;overflow:hidden}
+.bs i u{position:absolute;inset:0 auto 0 0;background:var(--up)}
+.msg{text-align:center;max-width:640px;margin:26px auto 0;padding:28px 28px 26px;background:rgba(11,18,34,.92);border:1px solid var(--line);border-radius:20px}
+.msg.bad{border-color:rgba(255,95,109,.28)}
+.msg-orb svg{width:120px;height:60px}
+.msg h2{margin:6px 0 6px;font-size:26px;font-weight:600;letter-spacing:-.03em}
+.msg p{margin:8px 0 0;color:var(--muted);font-size:15px}
+.msg .addr{margin-top:12px}
+/* landing below the tool */
+section.land{padding:80px 0 0}
+.head{text-align:center;max-width:640px;margin:0 auto 30px}
+h2{font-size:38px;line-height:1.1;font-weight:600;letter-spacing:-.04em;margin:0}
+.sub{color:var(--muted);margin:12px 0 0}
+.install{display:inline-flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:6px 6px 6px 22px;max-width:100%}
+.install span{font:15px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.install span b{color:var(--accent);font-weight:400;margin-right:8px}
+.copy{font:600 14px var(--sans);color:#060A14;background:var(--accent);border:0;border-radius:999px;padding:10px 20px;cursor:pointer;flex:none}
+.cli{text-align:center;margin:0 0 22px}
+.meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.term{padding:0!important;overflow:hidden}
+.term .tb{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line)}
+.term .tb b{font-weight:600;letter-spacing:-.04em;display:flex;align-items:center;gap:10px}
+.term .tb b svg{display:block}
+.term .tb span{font:12px var(--mono);color:var(--muted);border:1px solid var(--line);background:var(--raised);border-radius:999px;padding:4px 12px}
+pre{margin:0;font:13px/1.55 var(--mono);color:var(--text);overflow-x:auto}
+.term pre{padding:20px 24px 24px}
+pre .p,pre .c{color:var(--accent)}pre .m{color:var(--muted)}pre .u{color:var(--up)}pre .d{color:var(--down)}pre .b{font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f{padding:26px 24px}
+.f svg{display:block;margin-bottom:18px}
+.f h3{margin:0 0 6px;font-size:18px;font-weight:600;letter-spacing:-.02em}
+.f p{margin:0;color:var(--muted);font-size:14.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.two h3{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.03em}
+.two .sub{font-size:14.5px;margin:0 0 18px}
+.two table{width:100%;border-collapse:collapse;font-size:14px}
+.two th{text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;padding:8px 10px}
+.two td{padding:10px;border-top:1px solid var(--line);vertical-align:top}
+table.sc td:nth-child(2){font-family:var(--mono);color:var(--accent)}
+.code{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.code .k{color:var(--accent)}.code .s{color:#B9CCEB}
+.faq{max-width:760px;margin:0 auto;display:grid;gap:10px}
+details{background:rgba(11,18,34,.92);border:1px solid var(--line);border-radius:20px;padding:16px 22px}
+details[open]{border-color:var(--line2)}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:18px/1 var(--mono);color:var(--accent)}
+details[open] summary::after{content:"-"}
+details p{margin:10px 0 0;color:var(--muted);font-size:15px}
+footer{text-align:center;color:var(--muted);font-size:13.5px;padding:70px 0 44px}
+footer .fb{display:flex;justify-content:center;align-items:center;gap:10px;color:var(--text);font-weight:600;letter-spacing:-.04em;font-size:18px;margin-bottom:10px}
+footer .fb img{border-radius:7px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+@media (max-width:980px){.orbit{grid-template-columns:1fr 1fr;grid-template-areas:"g g" "l r"}.gauge{grid-area:g}.side.l{grid-area:l;text-align:left}.side.r{grid-area:r}.duo{grid-template-columns:minmax(0,1fr)}.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:minmax(0,1fr)}h1{font-size:46px}}
+@media (max-width:620px){.w{padding:0 16px}nav{padding:16px 0}.links a:not(.gh){display:none}
+.hero{padding-top:12px}.hero .rings{width:640px;height:300px;top:-30px}h1{font-size:36px;margin-top:14px}.lede{font-size:15px}
+form.scan{flex-wrap:wrap;border-radius:24px;padding:8px;margin-top:20px}#token{flex-basis:100%;padding:10px 12px;font-size:13px}#chain{border-left:0;flex:1;padding-left:12px}.go{flex:none}
+.ex{gap:6px}.ex>span:first-child{flex-basis:100%}
+.welcome .orb{height:170px}.welcome .orb svg{width:600px;height:260px}.welcome .orb img{width:108px;height:108px;border-radius:24px}
+.res-head{padding-top:22px}.sym{font-size:38px}.say{font-size:13px}.hint-d{display:none}.hint-m{display:inline}.qline{gap:6px 14px}.acts .ghost{padding:6px 12px;font-size:12.5px}
+.orbit{gap:22px 14px;margin-top:22px}.gauge{width:240px;height:240px}.gauge .sc{font-size:60px}.side{gap:18px}.st .v{font-size:22px}
+#app .panel{padding:18px 16px}#app .graph{padding:14px 10px 10px}.price svg,.sk.spark{width:45%}.gsk{aspect-ratio:4/5}
+.msg{padding:22px 18px}.msg h2{font-size:22px}
+section.land{padding-top:60px}h2{font-size:30px}.grid{grid-template-columns:1fr}.panel{padding:18px}.install{padding-left:16px}.install span{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="w">
+<nav>
+  <a class="brand" href="./"><img src="icon.png" width="30" height="30" alt="">moons</a>
+  <div class="links"><a href="#tool">Tool</a><a href="#cli">CLI</a><a href="#features">Features</a><a href="#score">Score</a><a href="#mcp">MCP</a><a href="#faq">FAQ</a><a class="gh" href="https://github.com/OWNER/moons">GitHub</a></div>
+</nav>
+
+<header class="hero" id="tool">
+  <svg class="rings" viewBox="0 0 1100 460" aria-hidden="true">
+    <ellipse cx="550" cy="230" rx="200" ry="74" fill="none" stroke="#8DB8FF" stroke-opacity=".13"/>
+    <ellipse cx="550" cy="230" rx="330" ry="124" fill="none" stroke="#8DB8FF" stroke-opacity=".10"/>
+    <ellipse cx="550" cy="230" rx="450" ry="170" fill="none" stroke="#8DB8FF" stroke-opacity=".07"/>
+    <ellipse cx="550" cy="230" rx="545" ry="212" fill="none" stroke="#8DB8FF" stroke-opacity=".04"/>
+    <circle cx="985" cy="150" r="5" fill="#3DDC84" fill-opacity=".8"/>
+    <circle cx="118" cy="296" r="4" fill="#8DB8FF"/>
+    <circle cx="1022" cy="318" r="3.5" fill="#FF5F6D" fill-opacity=".8"/>
+    <circle cx="72" cy="178" r="3" fill="#8DB8FF" fill-opacity=".7"/>
+    <circle cx="1068" cy="236" r="2.5" fill="#3DDC84" fill-opacity=".7"/>
+    <circle cx="172" cy="392" r="2.5" fill="#8DB8FF" fill-opacity=".6"/>
+  </svg>
+  <span class="kicker"><i></i>$MOONS &middot; v1.1.0 &middot; live DexScreener data</span>
+  <h1>every coin that trades <em>against yours.</em></h1>
+  <p class="lede">paste a token address. moons finds every pair quoted in it, estimates the buy flow they send back and scores the set from 0 to 100. right here, in your browser.</p>
+  <form class="scan" id="scan" autocomplete="off">
+    <input id="token" name="token" placeholder="paste a token address or link" spellcheck="false" aria-label="Token address">
+    <select id="chain" name="chain" aria-label="Chain"></select>
+    <button class="go" type="submit">Scan</button>
+  </form>
+  <div class="ex"><span>try with an example:</span><a class="first" href="?token=USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" data-example="USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" data-chain="solana">USD1 <span>bonk.fun quote</span></a><a href="?token=HgBRWfYxEfvPhtqkaeymCQtHCrKE46qQ43pKe8HCpump" data-example="HgBRWfYxEfvPhtqkaeymCQtHCrKE46qQ43pKe8HCpump" data-chain="solana">Bert <span>memecoin</span></a><a href="?token=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" data-example="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" data-chain="solana">USDC <span>stablecoin</span></a></div>
+</header>
+
+<main id="app" aria-live="polite"><div class="welcome">
+  <div class="orb"><svg viewBox="0 0 900 380" aria-hidden="true"><ellipse cx="450" cy="190" rx="150" ry="62" fill="none" stroke="#8DB8FF" stroke-opacity=".20"/><ellipse cx="450" cy="190" rx="260" ry="106" fill="none" stroke="#8DB8FF" stroke-opacity=".12"/><ellipse cx="450" cy="190" rx="370" ry="150" fill="none" stroke="#8DB8FF" stroke-opacity=".07"/><circle cx="600" cy="168" r="5" fill="#3DDC84" fill-opacity=".85"/><circle cx="198" cy="226" r="4" fill="#8DB8FF"/><circle cx="680" cy="268" r="3.5" fill="#FF5F6D" fill-opacity=".85"/></svg><img src="icon.png" alt="moons logo"></div>
+  <p>your report lands here: the health ring, flow into your token, the pair network, new pairs and every pool. nothing to install, no wallet, no key.</p>
+</div></main>
+
+<section id="cli" class="land">
+  <div class="head"><h2>same report in your terminal</h2><p class="sub">the site runs the exact code of the CLI. in the terminal you also get watch mode, history, alerts to Discord and Telegram, compare and a local dashboard. example data from the bundled mock API below.</p></div>
+  <div class="cli"><div class="install"><span><b>$</b>npx moons-cli &lt;mint&gt;</span><button class="copy" type="button" data-copy="npx moons-cli <mint>">Copy</button></div>
+  <div class="meta"><span>Node 18+</span><span>zero dependencies</span><span>no API key</span><span>CLI, dashboard, MCP</span></div></div>
+  <div class="panel term"><div class="tb"><b><svg width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><ellipse cx="11" cy="6" rx="10" ry="4.5" fill="none" stroke="#8DB8FF" stroke-opacity=".5"/><circle cx="11" cy="6" r="3.5" fill="#8DB8FF"/></svg>moons</b><span>example data</span></div><pre><!--TERM--><span class="p">moons &#8250;</span> MoonsQuoteMint1111111111111111111111111pump --limit 6
+<span class="m">Quote token       </span>MOONS MoonsQuoteMint1111111111111111111111111pump (solana)
+<span class="m">Quote price       </span>$0.010, mcap $10.1M
+<span class="m">Pairs             </span>6 (5 active, 4 on pump.fun/PumpSwap)
+<span class="m">Volume 24h        </span>$836K
+<span class="m">Flow into quote   </span><span class="c">$417K</span> est. (buy-side volume), 4.1% of quote mcap
+<span class="m">Liquidity         </span>$1.2M
+<span class="m">Buys / sells      </span>5199 / 5134 (50% buys)
+<span class="m">Concentration     </span>top 3 = 94% of volume (MWHALE, EDOG, TESTFROGGYLONGTICKER)
+<span class="m">Growth            </span>2 new in 24h, 4 new in 7d
+<span class="m">Routed via quote  </span>68% of paired coins&#39; total volume
+<span class="m">Newest pair       </span>FRESH on pumpfun, 25m old
+<span class="m">Pairing health    </span><span class="c">62/100 moderate</span>
+<span class="m">  Breadth         </span><span class="c">#####.......</span>  9.1/20  <span class="m">5 active</span>
+<span class="m">  Flow            </span><span class="c">###########.</span> 23.4/25  <span class="m">$417K est.</span>
+<span class="m">  Diversification </span><span class="c">#######.....</span> 11.3/20  <span class="m">HHI 0.44</span>
+<span class="m">  Growth          </span><span class="c">#####.......</span>    6/15  <span class="m">4 new in 7d</span>
+<span class="m">  Depth           </span><span class="c">########....</span>  6.7/10  <span class="m">4/6 deep</span>
+<span class="m">  Buy pressure    </span><span class="c">######......</span>  5.2/10  <span class="m">50% buys</span>
+
+<span class="b">PAIR                    DEX            PRICE  VOL 24H  FLOW EST  LIQUIDITY    MCAP  CHG 24H  BUYS/SELLS  VIA QUOTE   AGE</span>
+MWHALE/MOONS            raydium       $0.012    $510K  <span class="c">   $245K</span>      $890K  $12.1M  <span class="u">  +0.6%</span>   2210/2398        60%  120d
+EDOG/MOONS              pumpswap    $0.00041    $184K  <span class="c">   $101K</span>     $61.2K   $412K  <span class="u"> +23.4%</span>   1840/1502        75%    2d
+TESTFROGGYLONGTICKER/…  meteora      $0.0018   $95.4K  <span class="c">  $49.6K</span>      $221K   $1.8M  <span class="u">  +4.1%</span>     420/388       100%   41d
+SCAT/MOONS              pumpfun    $0.000031   $42.1K  <span class="c">  $19.6K</span>     $12.8K    $31K  <span class="d"> -12.8%</span>     610/702       100%    3h
+DBIRD/MOONS             pumpswap  $0.0000072    $3.1K  <span class="c">   $1.2K</span>      $4.1K   $7.2K  <span class="d"> -45.0%</span>      88/140       100%    6d
+FRESH/MOONS             pumpfun   $0.0000051     $880  <span class="c">    $779</span>          -   $5.1K        -        31/4       100%   25m<!--/TERM--></pre></div>
+</section>
+
+<section id="features" class="land">
+  <div class="head"><h2>what you get</h2><p class="sub">the website, CLI, library, local dashboard and MCP server all run on the same core. public DexScreener data, GeckoTerminal candles for the quote price.</p></div>
+  <div class="grid">
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="#8DB8FF" stroke-opacity=".25"/><circle cx="20" cy="20" r="7" fill="#8DB8FF"/><path d="M4 20h7M29 20h7" stroke="#8DB8FF" stroke-width="1.6" stroke-linecap="round"/></svg><h3>flow back</h3><p>buy-side volume per pair, <code>vol x buys / (buys + sells)</code>, summed and compared with your token's market cap. always labelled as an estimate.</p></div>
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="#111A2E" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="#8DB8FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="70 101" transform="rotate(-90 20 20)"/></svg><h3>health score</h3><p>0 to 100 from six parts: breadth, flow, diversification, growth, depth and buy pressure. every formula is in the README.</p></div>
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="13" cy="20" r="9" fill="none" stroke="#8DB8FF" stroke-width="1.6"/><circle cx="27" cy="20" r="9" fill="none" stroke="#8DB8FF" stroke-opacity=".5" stroke-width="1.6"/></svg><h3>compare</h3><p><code>moons compare A B</code> puts up to 5 tokens side by side and marks who leads each number.</p></div>
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30 L13 24 L20 26 L28 14 L36 10" fill="none" stroke="#8DB8FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="10" r="3" fill="#8DB8FF"/></svg><h3>history</h3><p><code>--history file.json</code> keeps snapshots, so deltas survive restarts. <code>moons history</code> prints growth over time.</p></div>
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="6" fill="#8DB8FF"/><circle cx="20" cy="20" r="12" fill="none" stroke="#8DB8FF" stroke-opacity=".45"/><circle cx="20" cy="20" r="18" fill="none" stroke="#8DB8FF" stroke-opacity=".2"/></svg><h3>alerts</h3><p>new pairs and threshold crossings to Discord webhooks and Telegram, plus a JSON payload for your own bots.</p></div>
+    <div class="panel f"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="20" rx="18" ry="8" fill="none" stroke="#8DB8FF" stroke-opacity=".4"/><circle cx="20" cy="20" r="6" fill="#8DB8FF"/><circle cx="36" cy="17" r="2.5" fill="#3DDC84"/><circle cx="5" cy="23" r="2" fill="#FF5F6D"/></svg><h3>graph and dashboard</h3><p><code>--graph out.html</code> draws your token with its moons around it. <code>moons ui</code> runs a local dashboard that refreshes itself.</p></div>
+  </div>
+</section>
+
+<section id="score" class="land">
+  <div class="two">
+    <div class="panel">
+      <h3>how the score works</h3>
+      <p class="sub">six parts, rounded sum out of 100. 70 and up is strong, 40 to 69 moderate, under 40 weak.</p>
+      <table class="sc">
+        <tr><th>Part</th><th>Max</th><th>Formula</th></tr>
+        <tr><td>Breadth</td><td>20</td><td>active pairs (24h volume &ge; $1K), log scale, full at 50</td></tr>
+        <tr><td>Flow</td><td>25</td><td>estimated 24h flow, log scale, full at $1M</td></tr>
+        <tr><td>Diversification</td><td>20</td><td>1 minus the HHI of volume shares</td></tr>
+        <tr><td>Growth</td><td>15</td><td>pairs created in 7 days, full at 10</td></tr>
+        <tr><td>Depth</td><td>10</td><td>share of pairs with liquidity &ge; $10K</td></tr>
+        <tr><td>Buy pressure</td><td>10</td><td>40% buys scores 0, 60% or more scores full</td></tr>
+      </table>
+    </div>
+    <div class="panel" id="mcp">
+      <h3>use it from an AI agent</h3>
+      <p class="sub"><code>moons mcp</code> runs an MCP server over stdio. drop this into Claude Desktop, Claude Code or Cursor:</p>
+<pre class="code">{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"moons"</span>: {
+      <span class="k">"command"</span>: <span class="s">"npx"</span>,
+      <span class="k">"args"</span>: [<span class="s">"-y"</span>, <span class="s">"moons-cli"</span>, <span class="s">"mcp"</span>]
+    }
+  }
+}</pre>
+      <table style="margin-top:18px">
+        <tr><th>Tool</th><th>Does</th></tr>
+        <tr><td><code>scan_pairs</code></td><td>pools quoted in a token, with flow estimates</td></tr>
+        <tr><td><code>ecosystem_report</code></td><td>metrics, health score and top pairs</td></tr>
+        <tr><td><code>compare_tokens</code></td><td>2 to 5 ecosystems side by side</td></tr>
+        <tr><td><code>new_pairs_since</code></td><td>pairs created after 24h, 7d or a date</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="land">
+  <div class="head"><h2>faq</h2></div>
+  <div class="faq">
+  <details open><summary>Is the flow figure exact?</summary><p>No. It approximates the USD value of buys in pairs quoted in your token from 24h volume and buy and sell counts, assuming equal average trade size. Use it to compare ecosystems and follow direction over time.</p></details>
+  <details><summary>Which chains are supported?</summary><p>Any chain DexScreener indexes. Solana is the default; pass <code>--chain base</code>, <code>--chain bsc</code> and so on. EVM addresses match case-insensitively.</p></details>
+  <details><summary>Do I need an API key or an account?</summary><p>No. moons uses public, documented DexScreener and GeckoTerminal endpoints, with retries, backoff and a short in-memory cache.</p></details>
+  <details><summary>Where does my data go?</summary><p>Nowhere except the API calls and the alert targets you configure. History stays in the local JSON file you name.</p></details>
+  <details><summary>Does the website send my data anywhere?</summary><p>No server in between. Your browser calls the public DexScreener API for pools and GeckoTerminal for the quote price line, and computes everything locally with the same code as the CLI.</p></details>
+  <details><summary>Why does a big token show few or no pairs?</summary><p>DexScreener returns up to 30 pools per token, most liquid first. For a large token those are mostly its own pools against SOL or USDC, so smaller coins paired against it can fall off the list. Launchpad quote tokens and coins that other coins pair against show up best.</p></details>
+  <details><summary>Can I use it as a library?</summary><p>Yes. <code>import { ecosystemReport } from 'moons-cli'</code>. The README lists every export.</p></details>
+  </div>
+</section>
+
+<footer><div class="fb"><img src="icon.png" width="24" height="24" alt="">moons</div>MIT licensed. market data from DexScreener and GeckoTerminal, fetched live by your browser. flow is an estimate. not financial advice.<br><a href="https://github.com/OWNER/moons">github.com/OWNER/moons</a></footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

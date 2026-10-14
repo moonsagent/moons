@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>moons dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cmask id='m' maskUnits='userSpaceOnUse' x='-20' y='-20' width='140' height='140'%3E%3Crect x='-20' y='-20' width='140' height='140' fill='%23fff'/%3E%3Cpath d='M24 32a6 6 0 1 0 12 0a6 6 0 1 0 -12 0Z'/%3E%3Cpath d='M44.5 22a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z'/%3E%3Cpath d='M22 54a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z'/%3E%3Cpath d='M57 72a15 15 0 1 0 30 0a15 15 0 1 0 -30 0Z' fill='none' stroke='%23000' stroke-width='8'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='%238DB8FF'%3E%3Cpath d='M10 42a32 32 0 1 0 64 0a32 32 0 1 0 -64 0Z'/%3E%3Cpath d='M57 72a15 15 0 1 0 30 0a15 15 0 1 0 -30 0Z'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+@font-face{font-family:Geist;src:url(/fonts/geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(/fonts/geist-mono-500.woff2) format("woff2");font-weight:500 700;font-display:swap}
+:root{--bg:#060A14;--panel:#0B1222;--raised:#111A2E;--line:rgba(141,184,255,.12);--line2:rgba(141,184,255,.24);--text:#E8EEF9;--muted:#7D8BA6;--accent:#8DB8FF;--up:#3DDC84;--down:#FF5F6D;
+--sans:Geist,Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+body{background-image:radial-gradient(rgba(141,184,255,.16) .8px,transparent 1.2px),radial-gradient(rgba(232,238,249,.10) .6px,transparent 1px);background-size:58px 58px,37px 37px;background-position:0 0,19px 23px;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px 56px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:20px;letter-spacing:-.04em}
+.brand img.logo{display:block;border-radius:7px}
+.navr{display:flex;align-items:center;gap:10px}
+.tagp{font:500 11.5px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:rgba(11,18,34,.6)}
+.sw{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;user-select:none;background:rgba(11,18,34,.6)}
+.sw input{position:absolute;opacity:0;pointer-events:none}
+.sw i{width:28px;height:16px;border-radius:999px;background:var(--raised);border:1px solid var(--line2);position:relative;transition:background .2s}
+.sw i::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.sw input:checked+i{background:rgba(141,184,255,.22)}.sw input:checked+i::after{transform:translateX(12px);background:var(--accent)}
+.sw b{font:500 11.5px var(--mono);color:var(--text);min-width:2.4em}
+.search{display:flex;justify-content:center;padding:34px 0 8px}
+form.scan{display:flex;align-items:center;gap:6px;width:100%;max-width:760px;background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:6px;box-shadow:0 0 0 6px rgba(141,184,255,.04),0 18px 50px rgba(2,5,12,.55)}
+form.scan:focus-within{border-color:rgba(141,184,255,.55)}
+input,select,button{font:inherit;color:var(--text);background:transparent;border:0;outline:none}
+#mint{flex:1;min-width:0;padding:10px 16px;font-family:var(--mono);font-size:13px}
+#mint::placeholder{color:var(--muted)}
+select{padding:9px 14px;border-left:1px solid var(--line);border-radius:0;color:var(--muted);cursor:pointer}
+select option{background:var(--panel)}
+button{cursor:pointer}
+.go{background:var(--accent);color:#060A14;font-weight:600;border-radius:999px;padding:10px 24px;transition:filter .15s}
+.go:hover{filter:brightness(1.08)}
+.status{font:12px var(--mono);color:var(--muted)}.status.err{color:var(--down)}
+.hero{position:relative;text-align:center;padding:46px 0 10px;overflow-x:clip}
+.rings{position:absolute;left:50%;top:-30px;width:880px;height:440px;transform:translateX(-50%);pointer-events:none;z-index:0}
+.hero>*:not(.rings){position:relative;z-index:1}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 13px;background:rgba(6,10,20,.7)}
+.kicker i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.hero h1{margin:14px 0 2px;font-size:68px;line-height:1;font-weight:600;letter-spacing:-.04em}
+.hero .nm{color:var(--muted);font-size:16px}
+.addr{display:inline-block;margin-top:14px;font:12px var(--mono);color:var(--muted);background:rgba(11,18,34,.8);border:1px solid var(--line);border-radius:999px;padding:6px 14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qline{margin-top:14px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.qline b{color:var(--text);font:500 13px var(--mono);margin-left:6px}
+.orbit{display:grid;grid-template-columns:1fr 300px 1fr;gap:28px;align-items:center;margin:34px 0 8px}
+.side{display:grid;gap:26px}
+.side.l{text-align:right}
+.st .k{font-size:12.5px;color:var(--muted)}
+.st .v{font:500 30px/1.15 var(--mono);letter-spacing:-.03em;margin-top:4px;white-space:nowrap}
+.st .s{font-size:12px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st.acc .v{color:var(--accent)}
+.gauge{position:relative;width:300px;height:300px;margin:0 auto}
+.gauge svg{position:absolute;inset:0;width:100%;height:100%}
+.gauge .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .lbl{font-size:12px;color:var(--muted)}
+.gauge .sc{font-weight:600;font-size:76px;line-height:1;letter-spacing:-.05em;margin-top:4px}
+.gauge .sc small{font:500 15px var(--mono);color:var(--muted);letter-spacing:0;margin-left:4px}
+.grade{display:inline-block;margin-top:10px;font-size:12px;font-weight:500;padding:4px 12px;border-radius:999px;border:1px solid}
+.panel{background:rgba(11,18,34,.92);border:1px solid var(--line);border-radius:20px;padding:22px 24px;min-width:0;margin-top:18px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 16px;flex-wrap:wrap}
+.ph h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em}
+.ph .status{font-size:11.5px}
+.graph{padding:22px 22px 18px}
+.graph .gw{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.graph svg{width:100%;height:auto;display:block}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo .panel{margin-top:18px}
+.comp{display:grid;gap:15px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:baseline;font-size:13px}
+.row em{font-style:normal;color:var(--muted);font-size:12px;margin-left:6px}
+.row .n{font:500 12.5px var(--mono);color:var(--text)}
+.row .n.cy{color:var(--accent)}
+.bar{grid-column:1/-1;height:4px;border-radius:999px;background:var(--raised);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(141,184,255,.45),var(--accent))}
+.note{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.6;padding-top:14px;border-top:1px solid var(--line)}
+.price{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:14px 16px;border-radius:14px;background:var(--raised);border:1px solid var(--line);margin-bottom:18px}
+.price .k{font-size:12px;color:var(--muted)}
+.price .px{font:500 22px var(--mono);letter-spacing:-.02em;margin-top:4px}
+.price svg{display:block;width:52%;height:46px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;gap:10px;align-items:center;background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:7px 15px 7px 7px;font-size:13px;color:var(--text);transition:border-color .15s}
+.chip:hover{border-color:var(--line2)}
+.chip .tag{font:500 10.5px var(--mono);color:#060A14;background:var(--accent);border-radius:999px;padding:3px 8px}
+.chip b{font-weight:600}
+.chip .m{color:var(--muted);font:12px var(--mono)}
+.empty{color:var(--muted);font-size:13px}
+.tbl{overflow-x:auto;margin:0 -8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-size:12px;color:var(--muted);font-weight:500;text-align:right;padding:9px 12px;cursor:pointer;white-space:nowrap;user-select:none}
+th.on{color:var(--accent)}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+td{padding:11px 12px;border-top:1px solid var(--line);text-align:right;font:12.5px var(--mono);white-space:nowrap}
+td:first-child{font:500 13px var(--sans)}
+td:first-child a{color:var(--text)}td:first-child a:hover{color:var(--accent)}
+tbody tr:hover td{background:rgba(141,184,255,.035)}
+tr.fresh td:first-child::after{content:"new";margin-left:8px;font:500 10px var(--mono);color:var(--accent);border:1px solid rgba(141,184,255,.4);border-radius:999px;padding:1px 7px;vertical-align:1px}
+.up{color:var(--up)}.down{color:var(--down)}.mut{color:var(--muted)}.cy{color:var(--accent)}
+.bs{display:inline-flex;align-items:center;gap:8px}
+.bs i{display:inline-block;width:40px;height:4px;border-radius:999px;background:var(--down);position:relative;overflow:hidden}
+.bs i u{position:absolute;inset:0 auto 0 0;background:var(--up)}
+.welcome{position:relative;text-align:center;padding:70px 0 40px;color:var(--muted);overflow-x:clip}
+.welcome .rings{top:-10px}
+.welcome>*:not(.rings){position:relative;z-index:1}
+.welcome img{display:block;margin:0 auto;border-radius:30px;width:132px;height:132px}
+.welcome h1{color:var(--text);font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.04em;margin:30px 0 10px}
+.welcome p{max-width:520px;margin:0 auto;line-height:1.6}
+footer{margin-top:40px;color:var(--muted);font-size:12px;text-align:center;line-height:1.7}
+footer .status{display:block}
+/*__GRAPH_CSS__*/
+@media (max-width:980px){.orbit{grid-template-columns:1fr 1fr;grid-template-areas:"g g" "l r"}.gauge{grid-area:g}.side.l{grid-area:l;text-align:left}.side.r{grid-area:r}.duo{grid-template-columns:1fr}}
+@media (max-width:620px){.wrap{padding:0 16px 40px}.nav{padding-top:16px}.tagp{display:none}.search{padding-top:22px}
+form.scan{flex-wrap:wrap;border-radius:24px;padding:8px}#mint{flex-basis:100%;padding:10px 12px}select{border-left:0;flex:1;padding-left:12px}.go{flex:none}
+.hero{padding-top:30px}.hero h1{font-size:46px}.rings{width:620px;height:320px}.qline{gap:6px 14px}
+.orbit{gap:22px 14px;margin-top:22px}.gauge{width:240px;height:240px}.gauge .sc{font-size:60px}.side{gap:18px}.st .v{font-size:22px}
+.panel{padding:18px 16px;border-radius:20px}.graph{padding:16px 12px 12px}.price svg{width:45%}.welcome h1{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="nav">
+  <div class="brand">__LOGO__<span>moons</span></div>
+  <div class="navr"><span class="tagp">v__VERSION__</span><label class="sw"><input type="checkbox" id="auto" checked><i></i>auto <b id="cd"></b></label></div>
+</header>
+<div class="search">
+  <form class="scan" id="f">
+    <input id="mint" placeholder="paste a token address" autocomplete="off" spellcheck="false" aria-label="Quote token address">
+    <select id="chain" aria-label="Chain"><option>solana</option><option>base</option><option>bsc</option><option>ethereum</option><option>arbitrum</option></select>
+    <button class="go" type="submit">Scan</button>
+  </form>
+</div>
+<main id="app"></main>
+<footer>Data: DexScreener (pairs), GeckoTerminal (quote price). Flow into quote is an estimate: 24h volume x buys / (buys + sells). Not financial advice.<span id="st" class="status"></span></footer>
+</div>
+<script>/*__GRAPH_SCRIPT__*/</script>
+<script>
+(function(){
+var CFG="__CONFIG__";
+var S={data:null,mint:'',chain:CFG.chain||'solana',sort:'volume24h',dir:-1,left:CFG.refresh,timer:null};
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function usd(n){if(n==null||!isFinite(n))return'-';var a=Math.abs(n),s=n<0?'-':'',u=[[1e12,'T'],[1e9,'B'],[1e6,'M'],[1e3,'K']];
+for(var i=0;i<u.length;i++)if(a>=u[i][0]){var x=a/u[i][0];return s+'$'+(x>=100?Math.round(x):+x.toFixed(1))+u[i][1]}
+if(a>=1)return s+'$'+(+a.toFixed(a>=100?0:2));if(a===0)return'$0';return s+'$'+(+a.toPrecision(2))}
+function pct(x,d){return x==null?'-':(x*100).toFixed(d||0)+'%'}
+function chg(p){return p==null?'<span class="mut">-</span>':'<span class="'+(p>=0?'up':'down')+'">'+(p>0?'+':'')+p.toFixed(1)+'%</span>'}
+function age(t,now){if(t==null)return'-';var s=Math.max(0,(now-t)/1000);if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h';if(s<31536000)return Math.floor(s/86400)+'d';return Math.floor(s/31536000)+'y'}
+function status(t,err){var e=$('st');e.textContent=t;e.className='status'+(err?' err':'')}
+function rings(){var h='<svg class="rings" viewBox="0 0 880 440" aria-hidden="true">',o=[[150,62],[250,104],[350,146],[440,188]];
+o.forEach(function(r,i){h+='<ellipse cx="440" cy="220" rx="'+r[0]+'" ry="'+r[1]+'" fill="none" stroke="#8DB8FF" stroke-opacity="'+(0.16-i*0.03)+'"/>'});
+[[0,0.3,3],[1,2.4,2.4],[2,4.1,2],[3,5.6,1.6],[1,5.2,1.8],[3,2.75,1.5]].forEach(function(d){var r=o[d[0]];h+='<circle cx="'+(440+r[0]*Math.cos(d[1])).toFixed(1)+'" cy="'+(220+r[1]*Math.sin(d[1])).toFixed(1)+'" r="'+d[2]+'" fill="#8DB8FF" fill-opacity=".55"/>'});
+return h+'</svg>'}
+function gauge(h){var R=128,C=2*Math.PI*R,f=Math.max(0,Math.min(1,h.score/100)),a=-Math.PI/2+f*2*Math.PI;
+var col=h.score>=70?'var(--up)':h.score>=40?'var(--accent)':'var(--down)';
+return'<div class="gauge"><svg viewBox="0 0 300 300" aria-hidden="true"><circle cx="150" cy="150" r="146" fill="none" stroke="#8DB8FF" stroke-opacity=".10"/>'+
+'<circle cx="150" cy="150" r="'+R+'" fill="none" stroke="#111A2E" stroke-width="10"/>'+
+'<circle cx="150" cy="150" r="'+R+'" fill="none" stroke="#8DB8FF" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+(C*f).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 150 150)"/>'+
+'<circle cx="150" cy="150" r="104" fill="#0B1222" stroke="#8DB8FF" stroke-opacity=".12"/>'+
+'<circle cx="'+(150+R*Math.cos(a)).toFixed(1)+'" cy="'+(150+R*Math.sin(a)).toFixed(1)+'" r="9" fill="#E8EEF9" stroke="#060A14" stroke-width="3"/></svg>'+
+'<div class="mid"><span class="lbl">pairing health</span><div class="sc">'+h.score+'<small>/100</small></div><span class="grade" style="color:'+col+';border-color:'+col+'">'+h.grade+'</span></div></div>'}
+function spark(o){if(!o||!o.candles||o.candles.length<2)return'<div class="price"><div><div class="k">quote price</div><div class="px">no OHLCV</div></div></div>';
+var c=o.candles.map(function(k){return k.c}),mn=Math.min.apply(0,c),mx=Math.max.apply(0,c),w=240,h=46,r=mx-mn||1;
+var pts=c.map(function(v,i){return[(i/(c.length-1))*w,h-3-((v-mn)/r)*(h-6)]});
+var d='M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}).join('L');
+var up=o.change>=0,col=up?'#3DDC84':'#FF5F6D';
+return'<div class="price"><div><div class="k">quote price, '+o.candles.length+'h <span class="'+(up?'up':'down')+'">'+(o.change>0?'+':'')+pct(o.change,1)+'</span></div><div class="px">'+usd(c[c.length-1])+'</div></div>'+
+'<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".25"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
+'<path d="'+d+'L'+w+' '+h+'L0 '+h+'Z" fill="url(#sg)"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg></div>'}
+var COLS=[['baseSymbol','Pair'],['dexId','DEX'],['volume24h','Vol 24h'],['flowUsd','Flow est.'],['liquidityUsd','Liquidity'],['marketCap','Mcap'],['change24h','24h'],['buys24h','Buys / sells'],['routeShare','Via quote'],['createdAt','Age']];
+function table(){var d=S.data,r=d.report,now=r.fetchedAt,fresh={};(d.newSinceRefresh||[]).forEach(function(a){fresh[a]=1});
+var rows=r.pairs.slice().sort(function(a,b){var x=a[S.sort],y=b[S.sort];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;
+if(typeof x==='string')return x.localeCompare(y)*S.dir;return(x-y)*S.dir});
+var hasVia=r.pairs.some(function(p){return p.routeShare!=null});
+var cols=COLS.filter(function(c){return c[0]!=='routeShare'||hasVia});
+var h='<tr>'+cols.map(function(c){return'<th data-k="'+c[0]+'" class="'+(S.sort===c[0]?'on':'')+'">'+c[1]+(S.sort===c[0]?(S.dir<0?' &#8595;':' &#8593;'):'')+'</th>'}).join('')+'</tr>';
+var b=rows.map(function(p){var t=p.buys24h+p.sells24h,bw=t?p.buys24h/t*100:0,isNew=fresh[p.pairAddress]||(p.createdAt&&now-p.createdAt<=864e5);
+var cells={baseSymbol:'<a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.baseSymbol)+'</a><span class="mut">/'+esc(p.quoteSymbol)+'</span>',dexId:'<span class="mut">'+esc(p.dexId)+'</span>',
+volume24h:usd(p.volume24h),flowUsd:'<span class="cy">'+usd(p.flowUsd)+'</span>',liquidityUsd:usd(p.liquidityUsd),marketCap:usd(p.marketCap),change24h:chg(p.change24h),
+buys24h:'<span class="bs">'+p.buys24h+'/'+p.sells24h+'<i><u style="width:'+bw.toFixed(0)+'%"></u></i></span>',routeShare:pct(p.routeShare),createdAt:age(p.createdAt,now)};
+return'<tr class="'+(isNew?'fresh':'')+'">'+cols.map(function(c){return'<td>'+cells[c[0]]+'</td>'}).join('')+'</tr>'}).join('');
+return'<table><thead>'+h+'</thead><tbody>'+b+'</tbody></table>'}
+function st(k,v,s,cls){return'<div class="st '+(cls||'')+'"><div class="k">'+k+'</div><div class="v">'+v+'</div><div class="s">'+s+'</div></div>'}
+function render(){var d=S.data,app=$('app');
+if(!d){var img=document.querySelector('.brand img').outerHTML.replace(/ width="\d+" height="\d+"/,'');
+app.innerHTML='<div class="welcome">'+rings()+img+'<h1>every coin that trades<br>against yours.</h1><p>paste a token address up top. moons finds every pair quoted in it, estimates the buy flow they send back and scores the whole set from 0 to 100.</p></div>';return}
+if(d.error){app.innerHTML='<div class="welcome">'+rings()+'<h1>could not load that token</h1><p>'+esc(d.mint||'')+'<br>'+esc(d.error)+'</p></div>';return}
+var r=d.report,m=r.metrics,h=r.health,q=r.quote||{},now=r.fetchedAt;
+var fresh=r.pairs.filter(function(p){return(d.newSinceRefresh||[]).indexOf(p.pairAddress)>=0||(p.createdAt&&now-p.createdAt<=864e5)}).sort(function(a,b){return b.createdAt-a.createdAt});
+var html='<section class="hero">'+rings()+'<span class="kicker"><i></i>quote token on '+esc(r.chain)+'</span><h1>'+esc(q.symbol||'Quote token')+'</h1>'+(q.name?'<div class="nm">'+esc(q.name)+'</div>':'')+
+'<div><span class="addr">'+esc(r.mint)+'</span></div>'+
+(q.priceUsd!=null?'<div class="qline"><span>price<b>'+usd(q.priceUsd)+'</b></span><span>mcap<b>'+usd(q.marketCap)+'</b></span>'+(q.mainPool?'<span>main pool<b>'+esc(q.symbol)+'/'+esc(q.mainPool.quoteSymbol)+'</b> <span class="mut">on '+esc(q.mainPool.dexId)+'</span></span>':'')+'</div>':'')+'</section>'+
+'<section class="orbit"><div class="side l">'+
+st('paired coins',m.totalPairs,m.activePairs+' active, '+m.pumpPairs+' on pump')+
+st('volume 24h',usd(m.volume24h),m.buys24h+' buys / '+m.sells24h+' sells')+
+st('liquidity',usd(m.liquidityUsd),m.deepPairs+' pairs over $10K')+
+'</div>'+gauge(h)+'<div class="side r">'+
+st('flow into quote',usd(m.flowUsd),'estimate'+(r.flowToMcap!=null?', '+pct(r.flowToMcap,1)+' of mcap':''),'acc')+
+st('new pairs',m.new24h+' / '+m.new7d,'last 24h / last 7d')+
+st('top 3 share',pct(m.top3Share),esc(m.top3.join(', ')))+
+'</div></section>'+
+'<section class="panel graph"><div class="ph"><h2>pair network</h2><span class="status">scroll to zoom, drag to pan, click a coin</span></div><div class="gw">'+d.graphSvg+'</div></section>'+
+'<div class="duo"><section class="panel"><div class="ph"><h2>health breakdown</h2><span class="status">points per part</span></div><div class="comp">'+
+h.components.map(function(c){return'<div class="row"><span>'+c.label+'<em>'+esc(c.detail)+'</em></span><span class="n">'+c.points+'/'+c.max+'</span><div class="bar"><i style="width:'+(c.points/c.max*100).toFixed(1)+'%"></i></div></div>'}).join('')+
+'</div><div class="note">Score = breadth 20 + flow 25 + diversification 20 + growth 15 + depth 10 + buy pressure 10.'+(m.routedShare!=null?' Routed via '+esc(q.symbol||'quote')+': '+pct(m.routedShare)+' of paired coins’ total volume.':'')+'</div></section>'+
+'<section class="panel"><div class="ph"><h2>flow leaders</h2><span class="status">share of est. flow</span></div>'+spark(d.ohlcv)+leaders(r)+'</section></div>'+
+'<section class="panel"><div class="ph"><h2>new pairs</h2><span class="status">last 24h or new since the previous refresh</span></div>'+
+(fresh.length?'<div class="chips">'+fresh.slice(0,12).map(function(p){return'<a class="chip" href="'+esc(p.url)+'" target="_blank" rel="noopener"><span class="tag">new</span><b>'+esc(p.baseSymbol)+'</b><span class="m">'+age(p.createdAt,now)+', vol '+usd(p.volume24h)+', flow '+usd(p.flowUsd)+'</span></a>'}).join('')+'</div>':'<div class="empty">No new pairs in the last 24h.</div>')+
+'</section><section class="panel"><div class="ph"><h2>all pairs</h2><span class="status">'+r.pairs.length+' rows, click a header to sort</span></div><div class="tbl" id="tbl">'+table()+'</div></section>';
+app.innerHTML=html;if(window.moonsGraph)window.moonsGraph(app);
+status('Updated '+new Date(r.fetchedAt).toISOString().slice(11,19)+' UTC')}
+function leaders(r){var t=r.metrics.flowUsd||1,top=r.pairs.slice().sort(function(a,b){return b.flowUsd-a.flowUsd}).slice(0,6);
+if(!top.length)return'<div class="empty">No flow yet.</div>';return'<div class="comp">'+top.map(function(p){var sh=p.flowUsd/t;
+return'<div class="row"><span>'+esc(p.baseSymbol)+'<em>'+pct(sh)+'</em></span><span class="n cy">'+usd(p.flowUsd)+'</span><div class="bar"><i style="width:'+(sh*100).toFixed(1)+'%"></i></div></div>'}).join('')+'</div>'}
+document.addEventListener('click',function(e){var th=e.target.closest&&e.target.closest('th[data-k]');if(!th)return;var k=th.dataset.k;
+if(S.sort===k)S.dir=-S.dir;else{S.sort=k;S.dir=(k==='baseSymbol'||k==='dexId')?1:-1}$('tbl').innerHTML=table()});
+function load(){if(!S.mint)return;status('Loading...');
+fetch('/api/report?mint='+encodeURIComponent(S.mint)+'&chain='+encodeURIComponent(S.chain)).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j})})
+.then(function(j){S.data=j;render()}).catch(function(e){status('Refresh failed: '+e.message,true);if(!S.data){S.data={error:e.message,mint:S.mint};render()}})}
+$('f').addEventListener('submit',function(e){e.preventDefault();S.mint=$('mint').value.trim();S.chain=$('chain').value;S.data=null;
+try{history.replaceState(null,'','?mint='+encodeURIComponent(S.mint)+'&chain='+encodeURIComponent(S.chain))}catch(_){}S.left=CFG.refresh;load()});
+setInterval(function(){if(!$('auto').checked||!S.mint){$('cd').textContent='off';return}S.left--;if(S.left<=0){S.left=CFG.refresh;load()}$('cd').textContent=S.left+'s'},1000);
+var qs=new URLSearchParams(location.search);S.mint=qs.get('mint')||'';S.chain=qs.get('chain')||S.chain;
+if(CFG.initial){S.data=CFG.initial;S.mint=S.mint||(CFG.initial.report&&CFG.initial.report.mint)||'';if(CFG.initial.report)S.chain=CFG.initial.report.chain}
+var sel=$('chain');if(![].some.call(sel.options,function(o){return o.value===S.chain})){var o=document.createElement('option');o.textContent=S.chain;sel.appendChild(o)}
+$('mint').value=S.mint;sel.value=S.chain;$('cd').textContent=S.mint?S.left+'s':'off';render();if(S.mint&&!CFG.initial)load();
+})();
+</script>
+</body>
+</html>

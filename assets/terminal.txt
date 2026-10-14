@@ -1,0 +1,27 @@
+$ moons MoonsQuoteMint1111111111111111111111111pump --limit 6
+Quote token       MOONS MoonsQuoteMint1111111111111111111111111pump (solana)
+Quote price       $0.010, mcap $10.1M
+Pairs             6 (5 active, 4 on pump.fun/PumpSwap)
+Volume 24h        $836K
+Flow into quote   $417K est. (buy-side volume), 4.1% of quote mcap
+Liquidity         $1.2M
+Buys / sells      5199 / 5134 (50% buys)
+Concentration     top 3 = 94% of volume (MWHALE, EDOG, TESTFROGGYLONGTICKER)
+Growth            2 new in 24h, 4 new in 7d
+Routed via quote  68% of paired coins' total volume
+Newest pair       FRESH on pumpfun, 25m old
+Pairing health    62/100 moderate
+  Breadth         #####.......  9.1/20  5 active
+  Flow            ###########. 23.4/25  $417K est.
+  Diversification #######..... 11.3/20  HHI 0.44
+  Growth          #####.......    6/15  4 new in 7d
+  Depth           ########....  6.7/10  4/6 deep
+  Buy pressure    ######......  5.2/10  50% buys
+
+PAIR                    DEX            PRICE  VOL 24H  FLOW EST  LIQUIDITY    MCAP  CHG 24H  BUYS/SELLS  VIA QUOTE   AGE
+MWHALE/MOONS            raydium       $0.012    $510K     $245K      $890K  $12.1M    +0.6%   2210/2398        60%  120d
+EDOG/MOONS              pumpswap    $0.00041    $184K     $101K     $61.2K   $412K   +23.4%   1840/1502        75%    2d
+TESTFROGGYLONGTICKER/…  meteora      $0.0018   $95.4K    $49.6K      $221K   $1.8M    +4.1%     420/388       100%   41d
+SCAT/MOONS              pumpfun    $0.000031   $42.1K    $19.6K     $12.8K    $31K   -12.8%     610/702       100%    3h
+DBIRD/MOONS             pumpswap  $0.0000072    $3.1K     $1.2K      $4.1K   $7.2K   -45.0%      88/140       100%    6d
+FRESH/MOONS             pumpfun   $0.0000051     $880      $779          -   $5.1K        -        31/4       100%   25m

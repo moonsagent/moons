@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Source for banner.png. Render at 1280x640: node /home/claude/oss/_shared/render.mjs assets/banner.html assets/banner.png 1280 640 -->
+<style>
+@font-face{font-family:Geist;src:url(fonts/geist.woff2) format("woff2");font-weight:100 900}
+@font-face{font-family:"Geist Mono";src:url(fonts/geist-mono-400.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"Geist Mono";src:url(fonts/geist-mono-500.woff2) format("woff2");font-weight:500}
+html,body{margin:0;width:1280px;height:640px;overflow:hidden;background:#060A14}
+body{position:relative;font-family:Geist,system-ui,sans-serif;color:#E8EEF9;-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(rgba(141,184,255,.18) .9px,transparent 1.3px),radial-gradient(rgba(232,238,249,.10) .7px,transparent 1.1px),radial-gradient(ellipse 620px 300px at 640px 175px,rgba(141,184,255,.10),transparent 70%);background-size:58px 58px,37px 37px,auto;background-position:0 0,19px 23px,0 0}
+svg.o{position:absolute;left:0;top:0}
+.icon{position:absolute;left:550px;top:62px;width:180px;height:180px;border-radius:42px;box-shadow:0 0 90px rgba(141,184,255,.2)}
+.wm{position:absolute;left:0;right:0;top:268px;text-align:center;font-weight:600;font-size:108px;line-height:1;letter-spacing:-.04em}
+.pitch{position:absolute;left:0;right:0;top:396px;text-align:center;font-size:30px;letter-spacing:-.02em;color:#E8EEF9}
+.pitch span{color:#8DB8FF}
+.row{position:absolute;left:0;right:0;top:466px;display:flex;justify-content:center;gap:10px}
+.pill{font:500 15px "Geist Mono",monospace;color:#7D8BA6;border:1px solid rgba(141,184,255,.18);background:rgba(11,18,34,.9);border-radius:999px;padding:9px 18px}
+.pill b{font-weight:500;color:#E8EEF9}.pill b.a{color:#8DB8FF}.pill b.u{color:#3DDC84}
+.cmd{position:absolute;left:0;right:0;top:534px;text-align:center}
+.cmd span{display:inline-block;font:16px "Geist Mono",monospace;color:#E8EEF9;background:#0B1222;border:1px solid rgba(141,184,255,.3);border-radius:999px;padding:11px 26px}
+.cmd span i{font-style:normal;color:#8DB8FF;margin-right:10px}
+.lbl{position:absolute;font:500 12px "Geist Mono",monospace;color:#7D8BA6;letter-spacing:.02em}
+.ex{position:absolute;right:64px;bottom:44px;font:12px "Geist Mono",monospace;color:#4D5A73}
+</style>
+</head>
+<body>
+<svg class="o" width="1280" height="640" viewBox="0 0 1280 640" aria-hidden="true">
+  <g fill="none" stroke="#8DB8FF">
+    <ellipse cx="640" cy="152" rx="170" ry="64" stroke-opacity=".20"/>
+    <ellipse cx="640" cy="152" rx="300" ry="112" stroke-opacity=".14"/>
+    <ellipse cx="640" cy="152" rx="440" ry="164" stroke-opacity=".09"/>
+    <ellipse cx="640" cy="152" rx="590" ry="220" stroke-opacity=".05"/>
+  </g>
+  <circle cx="900" cy="117" r="7" fill="#3DDC84" fill-opacity=".9"/>
+  <circle cx="356" cy="180" r="6" fill="#3DDC84" fill-opacity=".8"/>
+  <circle cx="1040" cy="214" r="5" fill="#FF5F6D" fill-opacity=".85"/>
+  <circle cx="226" cy="88" r="4.5" fill="#FF5F6D" fill-opacity=".8"/>
+  <circle cx="1146" cy="66" r="3.5" fill="#8DB8FF" fill-opacity=".8"/>
+  <circle cx="480" cy="44" r="3" fill="#8DB8FF" fill-opacity=".7"/>
+</svg>
+<div class="lbl" style="left:916px;top:96px">MWHALE</div>
+<div class="lbl" style="left:300px;top:196px">EDOG</div>
+<div class="lbl" style="left:1056px;top:220px">SCAT</div>
+<div class="lbl" style="left:160px;top:64px">DBIRD</div>
+<img class="icon" src="icon.png" alt="">
+<div class="wm">moons</div>
+<div class="pitch">every coin that trades <span>against yours.</span></div>
+<div class="row">
+  <span class="pill">pairs <b>6</b></span>
+  <span class="pill">volume 24h <b>$836K</b></span>
+  <span class="pill">flow into quote <b class="a">$417K</b> est.</span>
+  <span class="pill">health <b>62/100</b> moderate</span>
+</div>
+<div class="cmd"><span><i>$</i>npx moons-cli &lt;mint&gt;</span></div>
+<div class="ex">example data</div>
+</body>
+</html>

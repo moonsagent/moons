@@ -1,0 +1,59 @@
+{
+  "name": "moons-cli",
+  "version": "1.1.0",
+  "description": "every coin that trades against yours. lists every pair quoted in your token on DexScreener, estimates the flow into it, scores pairing health, draws the pair graph, alerts on new pairs. dashboard and MCP server included, zero dependencies.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./format": "./src/format.js",
+    "./graph": "./src/graph.js",
+    "./mcp": "./src/mcp.js",
+    "./server": "./src/server.js"
+  },
+  "bin": {
+    "moons": "bin/moons.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "mock": "node scripts/mock-server.js",
+    "assets": "node scripts/build-assets.mjs",
+    "site": "node scripts/dev-site.mjs --mock"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "moons",
+    "solana",
+    "memecoin",
+    "quote-token",
+    "pairs",
+    "dexscreener",
+    "geckoterminal",
+    "pumpfun",
+    "pumpswap",
+    "launchpad",
+    "liquidity",
+    "mcp",
+    "model-context-protocol",
+    "cli",
+    "dashboard"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/moons.git"
+  },
+  "homepage": "https://moonscli.com",
+  "bugs": {
+    "url": "https://github.com/OWNER/moons/issues"
+  }
+}

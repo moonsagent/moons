@@ -1,0 +1,282 @@
+[
+  {
+    "chainId": "solana",
+    "dexId": "pumpswap",
+    "url": "https://dexscreener.com/solana/PairPadA111111111111111111111111111111111111",
+    "pairAddress": "PairPadA111111111111111111111111111111111111",
+    "baseToken": {
+      "address": "BasePadA1111111111111111111111111111111pump",
+      "symbol": "ORBIT",
+      "name": "Orbit Sample"
+    },
+    "quoteToken": {
+      "address": "PadQuoteMint22222222222222222222222222222pump",
+      "name": "Pad Example",
+      "symbol": "PAD"
+    },
+    "priceNative": "0",
+    "priceUsd": "0.0009",
+    "txns": {
+      "h24": {
+        "buys": 920,
+        "sells": 610
+      },
+      "h6": {
+        "buys": 230,
+        "sells": 153
+      },
+      "h1": {
+        "buys": 0,
+        "sells": 0
+      },
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      }
+    },
+    "volume": {
+      "h24": 128400,
+      "h6": 32100,
+      "h1": 5350,
+      "m5": 0
+    },
+    "priceChange": {
+      "h24": 41.2,
+      "h6": 0,
+      "h1": 0,
+      "m5": 0
+    },
+    "liquidity": {
+      "usd": 48300,
+      "base": 0,
+      "quote": 0
+    },
+    "fdv": 905000,
+    "marketCap": 905000,
+    "pairCreatedAt": 1791871200000
+  },
+  {
+    "chainId": "solana",
+    "dexId": "pumpfun",
+    "url": "https://dexscreener.com/solana/PairPadB111111111111111111111111111111111111",
+    "pairAddress": "PairPadB111111111111111111111111111111111111",
+    "baseToken": {
+      "address": "BasePadB1111111111111111111111111111111pump",
+      "symbol": "LANTERN",
+      "name": "Lantern Sample"
+    },
+    "quoteToken": {
+      "address": "PadQuoteMint22222222222222222222222222222pump",
+      "name": "Pad Example",
+      "symbol": "PAD"
+    },
+    "priceNative": "0",
+    "priceUsd": "0.00006",
+    "txns": {
+      "h24": {
+        "buys": 410,
+        "sells": 380
+      },
+      "h6": {
+        "buys": 103,
+        "sells": 95
+      },
+      "h1": {
+        "buys": 0,
+        "sells": 0
+      },
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      }
+    },
+    "volume": {
+      "h24": 38700,
+      "h6": 9675,
+      "h1": 1612.5,
+      "m5": 0
+    },
+    "priceChange": {
+      "h24": -6.4,
+      "h6": 0,
+      "h1": 0,
+      "m5": 0
+    },
+    "liquidity": {
+      "usd": 15100,
+      "base": 0,
+      "quote": 0
+    },
+    "fdv": 61000,
+    "marketCap": 61000,
+    "pairCreatedAt": 1791957600000
+  },
+  {
+    "chainId": "solana",
+    "dexId": "pumpfun",
+    "url": "https://dexscreener.com/solana/PairPadC111111111111111111111111111111111111",
+    "pairAddress": "PairPadC111111111111111111111111111111111111",
+    "baseToken": {
+      "address": "BasePadC1111111111111111111111111111111pump",
+      "symbol": "KITE",
+      "name": "Kite Sample"
+    },
+    "quoteToken": {
+      "address": "PadQuoteMint22222222222222222222222222222pump",
+      "name": "Pad Example",
+      "symbol": "PAD"
+    },
+    "priceNative": "0",
+    "priceUsd": "0.00002",
+    "txns": {
+      "h24": {
+        "buys": 260,
+        "sells": 120
+      },
+      "h6": {
+        "buys": 65,
+        "sells": 30
+      },
+      "h1": {
+        "buys": 0,
+        "sells": 0
+      },
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      }
+    },
+    "volume": {
+      "h24": 21900,
+      "h6": 5475,
+      "h1": 912.5,
+      "m5": 0
+    },
+    "priceChange": {
+      "h24": 88,
+      "h6": 0,
+      "h1": 0,
+      "m5": 0
+    },
+    "liquidity": {
+      "usd": 9800,
+      "base": 0,
+      "quote": 0
+    },
+    "fdv": 24000,
+    "marketCap": 24000,
+    "pairCreatedAt": 1791972000000
+  },
+  {
+    "chainId": "solana",
+    "dexId": "meteora",
+    "url": "https://dexscreener.com/solana/PairPadD111111111111111111111111111111111111",
+    "pairAddress": "PairPadD111111111111111111111111111111111111",
+    "baseToken": {
+      "address": "BasePadD1111111111111111111111111111111pump",
+      "symbol": "MOSS",
+      "name": "Moss Sample"
+    },
+    "quoteToken": {
+      "address": "PadQuoteMint22222222222222222222222222222pump",
+      "name": "Pad Example",
+      "symbol": "PAD"
+    },
+    "priceNative": "0",
+    "priceUsd": "0.0031",
+    "txns": {
+      "h24": {
+        "buys": 300,
+        "sells": 352
+      },
+      "h6": {
+        "buys": 75,
+        "sells": 88
+      },
+      "h1": {
+        "buys": 0,
+        "sells": 0
+      },
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      }
+    },
+    "volume": {
+      "h24": 67200,
+      "h6": 16800,
+      "h1": 2800,
+      "m5": 0
+    },
+    "priceChange": {
+      "h24": -2.1,
+      "h6": 0,
+      "h1": 0,
+      "m5": 0
+    },
+    "liquidity": {
+      "usd": 132000,
+      "base": 0,
+      "quote": 0
+    },
+    "fdv": 3100000,
+    "marketCap": 3100000,
+    "pairCreatedAt": 1790337600000
+  },
+  {
+    "chainId": "solana",
+    "dexId": "raydium",
+    "url": "https://dexscreener.com/solana/PairPadSOL11111111111111111111111111111111111",
+    "pairAddress": "PairPadSOL11111111111111111111111111111111111",
+    "baseToken": {
+      "address": "PadQuoteMint22222222222222222222222222222pump",
+      "name": "Pad Example",
+      "symbol": "PAD"
+    },
+    "quoteToken": {
+      "address": "So11111111111111111111111111111111111111112",
+      "name": "Wrapped SOL",
+      "symbol": "SOL"
+    },
+    "priceNative": "0",
+    "priceUsd": "0.0042",
+    "txns": {
+      "h24": {
+        "buys": 3100,
+        "sells": 2900
+      },
+      "h6": {
+        "buys": 775,
+        "sells": 725
+      },
+      "h1": {
+        "buys": 0,
+        "sells": 0
+      },
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      }
+    },
+    "volume": {
+      "h24": 690000,
+      "h6": 172500,
+      "h1": 28750,
+      "m5": 0
+    },
+    "priceChange": {
+      "h24": 9.8,
+      "h6": 0,
+      "h1": 0,
+      "m5": 0
+    },
+    "liquidity": {
+      "usd": 610000,
+      "base": 0,
+      "quote": 0
+    },
+    "fdv": 4200000,
+    "marketCap": 4200000,
+    "pairCreatedAt": 1786795200000
+  }
+]

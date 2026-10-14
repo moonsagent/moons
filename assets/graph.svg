@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" class="mn-graph" role="img" aria-label="Pair network for HUB">
+<style>.mn-graph{font-family:Geist,Inter,system-ui,sans-serif}.mn-l{fill:#E8EEF9;font-size:11px;font-weight:600}.mn-q{fill:#E8EEF9;font-size:15px;font-weight:600;letter-spacing:-.02em}.mn-s{fill:#7D8BA6;font-size:11px}.mn-n{cursor:pointer}.mn-n:hover circle,.mn-n:focus circle{stroke-width:2.6;fill-opacity:.35}</style>
+<defs><pattern id="mn-stars" width="46" height="46" patternUnits="userSpaceOnUse"><circle cx="6" cy="9" r=".8" fill="#8DB8FF" fill-opacity=".22"/><circle cx="31" cy="27" r=".6" fill="#E8EEF9" fill-opacity=".18"/><circle cx="18" cy="40" r=".5" fill="#8DB8FF" fill-opacity=".14"/></pattern></defs>
+<rect width="960" height="720" fill="#060A14"/><rect width="960" height="720" fill="url(#mn-stars)"/>
+<ellipse cx="480" cy="360" rx="186.8" ry="138.4" fill="none" stroke="#8DB8FF" stroke-opacity="0.13" stroke-width="1"/><ellipse cx="480" cy="360" rx="291.4" ry="215.8" fill="none" stroke="#8DB8FF" stroke-opacity="0.13" stroke-width="1"/><ellipse cx="480" cy="360" rx="388.5" ry="287.8" fill="none" stroke="#8DB8FF" stroke-opacity="0.13" stroke-width="1"/>
+<line x1="480" y1="312" x2="480" y2="253.6" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="5.8"/>
+<line x1="518.6" y1="331.4" x2="590.2" y2="278.4" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="4.3"/>
+<line x1="528" y1="360" x2="639.7" y2="360" stroke="#8DB8FF" stroke-opacity="0.75" stroke-width="4" stroke-dasharray="4 4"/>
+<line x1="518.6" y1="388.6" x2="591" y2="442.2" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="3.6"/>
+<line x1="480" y1="408" x2="480" y2="473" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="3.6"/>
+<line x1="441.4" y1="388.6" x2="364.1" y2="445.8" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="2.2"/>
+<line x1="432" y1="360" x2="310.7" y2="360" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1.6"/>
+<line x1="441.4" y1="331.4" x2="361.4" y2="272.2" stroke="#8DB8FF" stroke-opacity="0.75" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="502.3" y1="317.5" x2="577.8" y2="173.2" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1.4"/>
+<line x1="519.5" y1="332.7" x2="680.3" y2="221.3" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1.3"/>
+<line x1="526.8" y1="349.2" x2="743.3" y2="299" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1.2"/>
+<line x1="527.7" y1="365.2" x2="754.5" y2="389.8" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1.1"/>
+<line x1="522.9" y1="381.5" x2="709.8" y2="475.1" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1"/>
+<line x1="509.7" y1="397.7" x2="619" y2="536.7" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="1"/>
+<line x1="485.1" y1="407.7" x2="501.6" y2="563.1" stroke="#8DB8FF" stroke-opacity="0.75" stroke-width="0.9" stroke-dasharray="4 4"/>
+<line x1="457.7" y1="402.5" x2="380.1" y2="550.7" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.9"/>
+<line x1="440.5" y1="387.3" x2="276.7" y2="500.9" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.9"/>
+<line x1="433.2" y1="370.8" x2="212.6" y2="421.9" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.9"/>
+<line x1="432.3" y1="354.8" x2="202.3" y2="329.9" stroke="#8DB8FF" stroke-opacity="0.75" stroke-width="0.9" stroke-dasharray="4 4"/>
+<line x1="437.1" y1="338.5" x2="248.1" y2="243.8" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.9"/>
+<line x1="450.3" y1="322.3" x2="339.5" y2="181.4" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="474.9" y1="312.3" x2="458.1" y2="154.4" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="517.3" y1="329.8" x2="734.7" y2="153.4" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="527.4" y1="367.7" x2="850.3" y2="420.3" stroke="#8DB8FF" stroke-opacity="0.75" stroke-width="0.8" stroke-dasharray="4 4"/>
+<line x1="498.9" y1="404.1" x2="593.8" y2="625.8" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="442.7" y1="390.2" x2="225.1" y2="566.8" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="432.6" y1="352.3" x2="109.4" y2="299.6" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<line x1="461.1" y1="315.9" x2="365.9" y2="93.7" stroke="#3B5A8C" stroke-opacity="0.38" stroke-width="0.8"/>
+<g class="mn-c"><circle cx="480" cy="360" r="56" fill="none" stroke="#8DB8FF" stroke-opacity="0.22" stroke-width="1"/><circle cx="480" cy="360" r="44" fill="#111A2E" stroke="#8DB8FF" stroke-width="2.5"/><text x="480" y="357" text-anchor="middle" class="mn-q">HUB</text><text x="480" y="375" text-anchor="middle" class="mn-s">28 pairs</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0111111111111111111111111111111111111" data-tip="BEACON/HUB on pumpfun
+Vol 24h $394K, flow est. $194K
+Liq $497K, mcap $2.8M
+3863 buys / 3979 sells, -14.2%, age 28d" tabindex="0"><circle cx="480" cy="221.6" r="30" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>BEACON/HUB on pumpfun
+Vol 24h $394K, flow est. $194K
+Liq $497K, mcap $2.8M
+3863 buys / 3979 sells, -14.2%, age 28d</title><text x="480" y="264.6" text-anchor="middle" class="mn-l">BEACON</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0011111111111111111111111111111111111" data-tip="ATLAS/HUB on pumpswap
+Vol 24h $252K, flow est. $136K
+Liq $284K, mcap $2M
+2710 buys / 2310 sells, -7.3%, age 9d" tabindex="0"><circle cx="612.1" cy="262.2" r="25.2" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>ATLAS/HUB on pumpswap
+Vol 24h $252K, flow est. $136K
+Liq $284K, mcap $2M
+2710 buys / 2310 sells, -7.3%, age 9d</title><text x="612.1" y="300.4" text-anchor="middle" class="mn-l">ATLAS</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0311111111111111111111111111111111111" data-tip="DRIFT/HUB on meteora
+Vol 24h $248K, flow est. $124K
+Liq $293K, mcap $1.9M
+1681 buys / 1696 sells, +12.6%, age 20h" tabindex="0"><circle cx="666.8" cy="360" r="29.1" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><circle cx="666.8" cy="360" r="25.1" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>DRIFT/HUB on meteora
+Vol 24h $248K, flow est. $124K
+Liq $293K, mcap $1.9M
+1681 buys / 1696 sells, +12.6%, age 20h</title><text x="666.8" y="398.1" text-anchor="middle" class="mn-l">DRIFT</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0211111111111111111111111111111111111" data-tip="CINDER/HUB on pumpswap
+Vol 24h $230K, flow est. $107K
+Liq $234K, mcap $1.7M
+2234 buys / 2544 sells, +40.2%, age 3d" tabindex="0"><circle cx="612.1" cy="457.8" r="24.3" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>CINDER/HUB on pumpswap
+Vol 24h $230K, flow est. $107K
+Liq $234K, mcap $1.7M
+2234 buys / 2544 sells, +40.2%, age 3d</title><text x="612.1" y="495.1" text-anchor="middle" class="mn-l">CINDER</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0411111111111111111111111111111111111" data-tip="EMBER/HUB on raydium
+Vol 24h $207K, flow est. $108K
+Liq $215K, mcap $1.8M
+2225 buys / 2026 sells, -21.4%, age 14d" tabindex="0"><circle cx="480" cy="498.4" r="23.4" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>EMBER/HUB on raydium
+Vol 24h $207K, flow est. $108K
+Liq $215K, mcap $1.8M
+2225 buys / 2026 sells, -21.4%, age 14d</title><text x="480" y="534.8" text-anchor="middle" class="mn-l">EMBER</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0511111111111111111111111111111111111" data-tip="FABLE/HUB on pumpfun
+Vol 24h $102K, flow est. $54.7K
+Liq $110K, mcap $656K
+891 buys / 763 sells, +36.6%, age 38d" tabindex="0"><circle cx="347.9" cy="457.8" r="18.2" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>FABLE/HUB on pumpfun
+Vol 24h $102K, flow est. $54.7K
+Liq $110K, mcap $656K
+891 buys / 763 sells, +36.6%, age 38d</title><text x="347.9" y="489" text-anchor="middle" class="mn-l">FABLE</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0611111111111111111111111111111111111" data-tip="GLINT/HUB on pumpswap
+Vol 24h $61.2K, flow est. $30K
+Liq $33.9K, mcap $329K
+521 buys / 543 sells, +39.1%, age 21d" tabindex="0"><circle cx="293.2" cy="360" r="15.5" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>GLINT/HUB on pumpswap
+Vol 24h $61.2K, flow est. $30K
+Liq $33.9K, mcap $329K
+521 buys / 543 sells, +39.1%, age 21d</title><text x="293.2" y="388.5" text-anchor="middle" class="mn-l">GLINT</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0811111111111111111111111111111111111" data-tip="IRIS/HUB on pumpswap
+Vol 24h $53.2K, flow est. $27.9K
+Liq $35.7K, mcap $248K
+466 buys / 422 sells, +15.5%, age 10h" tabindex="0"><circle cx="347.9" cy="262.2" r="18.8" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><circle cx="347.9" cy="262.2" r="14.8" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>IRIS/HUB on pumpswap
+Vol 24h $53.2K, flow est. $27.9K
+Liq $35.7K, mcap $248K
+466 buys / 422 sells, +15.5%, age 10h</title><text x="347.9" y="290" text-anchor="middle" class="mn-l">IRIS</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0711111111111111111111111111111111111" data-tip="HALO/HUB on pumpfun
+Vol 24h $47.5K, flow est. $25.1K
+Liq $63.3K, mcap $446K
+444 buys / 396 sells, -20.4%, age 27d" tabindex="0"><circle cx="585.4" cy="158.8" r="14.3" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>HALO/HUB on pumpfun
+Vol 24h $47.5K, flow est. $25.1K
+Liq $63.3K, mcap $446K
+444 buys / 396 sells, -20.4%, age 27d</title><text x="585.4" y="186.1" text-anchor="middle" class="mn-l">HALO</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub0911111111111111111111111111111111111" data-tip="JOLT/HUB on meteora
+Vol 24h $35.3K, flow est. $17.9K
+Liq $39K, mcap $250K
+446 buys / 433 sells, +7.7%, age 35d" tabindex="0"><circle cx="692.8" cy="212.6" r="13.2" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>JOLT/HUB on meteora
+Vol 24h $35.3K, flow est. $17.9K
+Liq $39K, mcap $250K
+446 buys / 433 sells, +7.7%, age 35d</title><text x="692.8" y="238.8" text-anchor="middle" class="mn-l">JOLT</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1011111111111111111111111111111111111" data-tip="KELP/HUB on raydium
+Vol 24h $35.1K, flow est. $15.2K
+Liq $29.7K, mcap $269K
+406 buys / 531 sells, +13.3%, age 16d" tabindex="0"><circle cx="758.1" cy="295.6" r="13.2" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>KELP/HUB on raydium
+Vol 24h $35.1K, flow est. $15.2K
+Liq $29.7K, mcap $269K
+406 buys / 531 sells, +13.3%, age 16d</title><text x="758.1" y="321.8" text-anchor="middle" class="mn-l">KELP</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1111111111111111111111111111111111111" data-tip="LUMEN/HUB on pumpfun
+Vol 24h $24K, flow est. $12.5K
+Liq $20.2K, mcap $217K
+260 buys / 240 sells, +31.9%, age 32d" tabindex="0"><circle cx="768.3" cy="391.3" r="11.9" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>LUMEN/HUB on pumpfun
+Vol 24h $24K, flow est. $12.5K
+Liq $20.2K, mcap $217K
+260 buys / 240 sells, +31.9%, age 32d</title><text x="768.3" y="416.2" text-anchor="middle" class="mn-l">LUMEN</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1411111111111111111111111111111111111" data-tip="OPAL/HUB on pumpswap
+Vol 24h $17K, flow est. $7.8K
+Liq $3.9K, mcap $35.3K
+256 buys / 303 sells, -27.5%, age 12d" tabindex="0"><circle cx="721.4" cy="480.9" r="11" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>OPAL/HUB on pumpswap
+Vol 24h $17K, flow est. $7.8K
+Liq $3.9K, mcap $35.3K
+256 buys / 303 sells, -27.5%, age 12d</title><text x="721.4" y="504.9" text-anchor="middle" class="mn-l">OPAL</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1211111111111111111111111111111111111" data-tip="MIRTH/HUB on pumpswap
+Vol 24h $14.1K, flow est. $8K
+Liq $15K, mcap $141K
+191 buys / 145 sells, +17.0%, age 4d" tabindex="0"><circle cx="626.7" cy="546.5" r="10.5" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>MIRTH/HUB on pumpswap
+Vol 24h $14.1K, flow est. $8K
+Liq $15K, mcap $141K
+191 buys / 145 sells, +17.0%, age 4d</title><text x="626.7" y="570" text-anchor="middle" class="mn-l">MIRTH</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1311111111111111111111111111111111111" data-tip="NOVA/HUB on pumpfun
+Vol 24h $11.9K, flow est. $5.7K
+Liq $20.7K, mcap $111K
+177 buys / 189 sells, +37.6%, age 5h" tabindex="0"><circle cx="502.9" cy="575.2" r="14.2" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><circle cx="502.9" cy="575.2" r="10.2" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>NOVA/HUB on pumpfun
+Vol 24h $11.9K, flow est. $5.7K
+Liq $20.7K, mcap $111K
+177 buys / 189 sells, +37.6%, age 5h</title><text x="502.9" y="598.4" text-anchor="middle" class="mn-l">NOVA</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1611111111111111111111111111111111111" data-tip="QUILL/HUB on raydium
+Vol 24h $10.3K, flow est. $5.4K
+Liq $4.2K, mcap $30.3K
+152 buys / 139 sells, -33.4%, age 36d" tabindex="0"><circle cx="374.6" cy="561.2" r="9.9" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>QUILL/HUB on raydium
+Vol 24h $10.3K, flow est. $5.4K
+Liq $4.2K, mcap $30.3K
+152 buys / 139 sells, -33.4%, age 36d</title><text x="374.6" y="584.1" text-anchor="middle" class="mn-l">QUILL</text></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1711111111111111111111111111111111111" data-tip="RIPPLE/HUB on pumpfun
+Vol 24h $8.2K, flow est. $3.6K
+Liq $7.7K, mcap $75.3K
+154 buys / 200 sells, +43.9%, age 1d" tabindex="0"><circle cx="267.2" cy="507.4" r="9.5" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>RIPPLE/HUB on pumpfun
+Vol 24h $8.2K, flow est. $3.6K
+Liq $7.7K, mcap $75.3K
+154 buys / 200 sells, +43.9%, age 1d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1511111111111111111111111111111111111" data-tip="PIXEL/HUB on meteora
+Vol 24h $6.1K, flow est. $3.4K
+Liq $5.8K, mcap $36K
+134 buys / 109 sells, -14.6%, age 30d" tabindex="0"><circle cx="201.9" cy="424.4" r="9" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>PIXEL/HUB on meteora
+Vol 24h $6.1K, flow est. $3.4K
+Liq $5.8K, mcap $36K
+134 buys / 109 sells, -14.6%, age 30d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1811111111111111111111111111111111111" data-tip="SPARK/HUB on pumpswap
+Vol 24h $5K, flow est. $2.8K
+Liq $2.7K, mcap $18.5K
+127 buys / 106 sells, -29.4%, age 6h" tabindex="0"><circle cx="191.7" cy="328.7" r="12.7" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><circle cx="191.7" cy="328.7" r="8.7" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>SPARK/HUB on pumpswap
+Vol 24h $5K, flow est. $2.8K
+Liq $2.7K, mcap $18.5K
+127 buys / 106 sells, -29.4%, age 6h</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub1911111111111111111111111111111111111" data-tip="TIDE/HUB on pumpfun
+Vol 24h $4.5K, flow est. $2.1K
+Liq $959, mcap $10.3K
+122 buys / 140 sells, +39.9%, age 20d" tabindex="0"><circle cx="238.6" cy="239.1" r="8.6" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>TIDE/HUB on pumpfun
+Vol 24h $4.5K, flow est. $2.1K
+Liq $959, mcap $10.3K
+122 buys / 140 sells, +39.9%, age 20d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2111111111111111111111111111111111111" data-tip="VELVET/HUB on meteora
+Vol 24h $3.1K, flow est. $1.6K
+Liq $4.5K, mcap $24.3K
+110 buys / 104 sells, -1.7%, age 10d" tabindex="0"><circle cx="333.3" cy="173.5" r="8.1" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>VELVET/HUB on meteora
+Vol 24h $3.1K, flow est. $1.6K
+Liq $4.5K, mcap $24.3K
+110 buys / 104 sells, -1.7%, age 10d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2011111111111111111111111111111111111" data-tip="UMBRA/HUB on pumpswap
+Vol 24h $2.1K, flow est. $905
+Liq $3.4K, mcap $18.6K
+99 buys / 126 sells, +45.8%, age 2d" tabindex="0"><circle cx="457.1" cy="144.8" r="7.7" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>UMBRA/HUB on pumpswap
+Vol 24h $2.1K, flow est. $905
+Liq $3.4K, mcap $18.6K
+99 buys / 126 sells, +45.8%, age 2d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2211111111111111111111111111111111111" data-tip="WISP/HUB on raydium
+Vol 24h $1.4K, flow est. $615
+Liq $1K, mcap $6.7K
+91 buys / 116 sells, +25.2%, age 23d" tabindex="0"><circle cx="742" cy="147.5" r="7.4" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>WISP/HUB on raydium
+Vol 24h $1.4K, flow est. $615
+Liq $1K, mcap $6.7K
+91 buys / 116 sells, +25.2%, age 23d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2311111111111111111111111111111111111" data-tip="XENO/HUB on pumpfun
+Vol 24h $1.2K, flow est. $618
+Liq $1.1K, mcap $5.4K
+91 buys / 86 sells, +45.9%, age 6h" tabindex="0"><circle cx="859.5" cy="421.8" r="11.3" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><circle cx="859.5" cy="421.8" r="7.3" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>XENO/HUB on pumpfun
+Vol 24h $1.2K, flow est. $618
+Liq $1.1K, mcap $5.4K
+91 buys / 86 sells, +45.9%, age 6h</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2411111111111111111111111111111111111" data-tip="YONDER/HUB on pumpswap
+Vol 24h $1.2K, flow est. $521
+Liq $824, mcap $8.6K
+92 buys / 119 sells, +6.2%, age 9d" tabindex="0"><circle cx="597.5" cy="634.3" r="7.3" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>YONDER/HUB on pumpswap
+Vol 24h $1.2K, flow est. $521
+Liq $824, mcap $8.6K
+92 buys / 119 sells, +6.2%, age 9d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2511111111111111111111111111111111111" data-tip="ZEPHYR/HUB on pumpfun
+Vol 24h $881, flow est. $381
+Liq $412, mcap $3.1K
+89 buys / 117 sells, -20.3%, age 20d" tabindex="0"><circle cx="218" cy="572.5" r="7.1" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>ZEPHYR/HUB on pumpfun
+Vol 24h $881, flow est. $381
+Liq $412, mcap $3.1K
+89 buys / 117 sells, -20.3%, age 20d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2611111111111111111111111111111111111" data-tip="ACORN/HUB on pumpswap
+Vol 24h $743, flow est. $363
+Liq $739, mcap $6K
+86 buys / 90 sells, +26.5%, age 21d" tabindex="0"><circle cx="100.5" cy="298.2" r="7" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84" stroke-width="1.6"/><title>ACORN/HUB on pumpswap
+Vol 24h $743, flow est. $363
+Liq $739, mcap $6K
+86 buys / 90 sells, +26.5%, age 21d</title></g>
+<g class="mn-n" data-url="https://dexscreener.com/solana/PairHub2711111111111111111111111111111111111" data-tip="BRISK/HUB on meteora
+Vol 24h $318, flow est. $157
+Liq -, mcap $2.5K
+82 buys / 84 sells, -10.3%, age 9d" tabindex="0"><circle cx="362.5" cy="85.7" r="6.7" fill="#FF5F6D" fill-opacity="0.18" stroke="#FF5F6D" stroke-width="1.6"/><title>BRISK/HUB on meteora
+Vol 24h $318, flow est. $157
+Liq -, mcap $2.5K
+82 buys / 84 sells, -10.3%, age 9d</title></g>
+<g class="mn-s" transform="translate(20 650)"><circle cx="7" cy="0" r="6" fill="#3DDC84" fill-opacity="0.18" stroke="#3DDC84"/><text x="20" y="4">size = 24h volume, green/red = 24h change</text><line x1="0" y1="20" x2="14" y2="20" stroke="#3B5A8C" stroke-width="3"/><text x="20" y="24">edge width = est. flow into HUB</text><circle cx="7" cy="40" r="6" fill="none" stroke="#8DB8FF" stroke-width="1.5"/><text x="20" y="44">ring = pair created in the last 24h</text></g>
+</svg>
